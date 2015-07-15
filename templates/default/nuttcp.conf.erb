@@ -3,15 +3,13 @@
 description "Network Monitoring Service"
 author "fcecagno"
 
-start on (local-filesystems and net-device-up IFACE!=lo)
+start on (local-filesystems and net-device-up IFACE=eth3)
 stop on shutdown
-
-respawn
 
 env USER=mconf
 env APP=/usr/local/bin/nuttcp-7.2.1
 env OPT="-S"
-env LOGFILE="<%= node[:mconf][:log][:dir] %>/live-notes-server.log"
+env LOGFILE="<%= node[:mconf][:log][:dir] %>/nuttcp.log"
 env PIDFILE="/var/run/nuttcp.pid"
 
 script
