@@ -101,4 +101,5 @@ service "performance_report" do
     else
       action [ :disable, :stop ]
     end
+    subscribes :restart, "python_pip[psutil]", :delayed
 end

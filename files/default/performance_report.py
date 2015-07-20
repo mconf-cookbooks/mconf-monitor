@@ -256,7 +256,7 @@ class MountedDisksReporter(Reporter):
             diskStates.append(state)
 
         message = self.formatMessage(humamMessages, nagiosMessages)
-        return message,max(diskStates)
+        return message,max(diskStates + [NAGIOS_OK])
 
     def formatMessage(self,humamMessages, nagiosMessages):
         concatenatedHumamMessages = string.join(humamMessages, ', ')
