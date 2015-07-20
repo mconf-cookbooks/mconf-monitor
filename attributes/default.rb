@@ -21,3 +21,5 @@ default['mconf']['topology'] = {}
 default['mconf']['remount_topology'] = false
 default['mconf']['as_lookup'] = nil
 default['mconf']['nuttcp']['enabled'] = false
+
+default['psutil']['version'] = "0.5.1"

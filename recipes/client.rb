@@ -20,9 +20,14 @@ else
 end
 
 include_recipe "nsca"
-include_recipe "psutil"
+include_recipe "python::default"
 
-%w{ git-core python-dev python-argparse subversion }.each do |pkg|
+python_pip "psutil" do
+  version node['psutil']['version']
+  notifies :restart, "service[performance_report]", :delayed
+end
+
+%w{ git-core python-dev python-argparse }.each do |pkg|
   package pkg do
     action :install
   end
@@ -101,5 +106,4 @@ service "performance_report" do
     else
       action [ :disable, :stop ]
     end
-    subscribes :restart, "python_pip[psutil]", :delayed
 end
