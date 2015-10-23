@@ -10,7 +10,8 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 
-%w{ python-argparse }.each do |pkg|
+%w{ python-argparse
+    libswitch-perl }.each do |pkg|
   package pkg do
     action :install
   end
