@@ -21,8 +21,8 @@ end
 
 cookbook_file "#{Chef::Config[:file_cache_path]}/nagios/cgi/status-json.c" do
   source "status-json.c"
-  owner node[:nagios][:user]
-  group node[:nagios][:group]
+  owner node['nagios']['user']
+  group node['nagios']['group']
   mode 00664
   action :create_if_missing
   only_if { ::File.exists?("#{Chef::Config[:file_cache_path]}/nagios/cgi") }
@@ -30,8 +30,8 @@ end
 
 cookbook_file "#{Chef::Config[:file_cache_path]}/nagios/cgi/status-json.patch" do
   source "status-json.patch"
-  owner node[:nagios][:user]
-  group node[:nagios][:group]
+  owner node['nagios']['user']
+  group node['nagios']['group']
   mode 00664
   action :create_if_missing
   only_if { ::File.exists?("#{Chef::Config[:file_cache_path]}/nagios/cgi") }

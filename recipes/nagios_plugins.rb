@@ -19,9 +19,9 @@ end
 
 %w{ bigbluebutton
     nagios-check_sip-1.3 }.each do |dir|
-  directory "#{node[:nagios][:plugin_dir]}/#{dir}" do
-    owner node[:nagios][:user]
-    group node[:nagios][:group]
+  directory "#{node['nagios']['plugin_dir']}/#{dir}" do
+    owner node['nagios']['user']
+    group node['nagios']['group']
     mode 00775
     action :create
   end
@@ -31,10 +31,10 @@ end
   package pkg
 end
 
-cookbook_file "#{node[:nagios][:plugin_dir]}/check_bbb_version" do
+cookbook_file "#{node['nagios']['plugin_dir']}/check_bbb_version" do
   source "check_bbb_version"
-  owner node[:nagios][:user]
-  group node[:nagios][:group]
+  owner node['nagios']['user']
+  group node['nagios']['group']
   mode 00775
   action :create
 end
@@ -43,10 +43,10 @@ end
     bigbluebutton/bigbluebutton_info.py 
     bigbluebutton/get-bigbluebutton-info.py 
     nagios-check_sip-1.3/check_sip }.each do |file|
-  cookbook_file "#{node[:nagios][:plugin_dir]}/#{file}" do
+  cookbook_file "#{node['nagios']['plugin_dir']}/#{file}" do
     source file
-    owner node[:nagios][:user]
-    group node[:nagios][:group]
+    owner node['nagios']['user']
+    group node['nagios']['group']
     mode 00755
     action :create
   end

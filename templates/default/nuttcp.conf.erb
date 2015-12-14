@@ -9,7 +9,7 @@ stop on shutdown
 env USER=mconf
 env APP=/usr/local/bin/nuttcp-7.2.1
 env OPT="-S"
-env LOGFILE="<%= node[:mconf][:log][:dir] %>/nuttcp.log"
+env LOGFILE="<%= node['mconf']['log']['dir'] %>/nuttcp.log"
 env PIDFILE="/var/run/nuttcp.pid"
 
 script

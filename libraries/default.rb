@@ -10,6 +10,17 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #
 
+def get_nsca_hostname
+  case node['mconf']['instance_type']
+  when "bigbluebutton"
+    node['bbb']['server_domain']
+  when "nagios"
+    "localhost"
+  else
+    node['ipaddress']
+  end
+end
+
 def command_execute(command, fail_on_error = false)
   process = {}
   process[:status] = Open4::popen4(command) do | pid, stdin, stdout, stderr|

@@ -8,7 +8,7 @@
 
 default['mconf']['tools']['dir'] = "/var/mconf/tools"
 default['mconf']['instance_type'] = "bigbluebutton"
-default['mconf']['interval'] = "20"
+default['mconf']['interval'] = 20
 default['mconf']['nagios']['dir'] = "#{node['mconf']['tools']['dir']}/nagios"
 # it should be a list, ex: ["server1","server2"]
 # if nil, it will use the attribute node['nsca_handler']['nsca_server'] instead
@@ -23,3 +23,14 @@ default['mconf']['as_lookup'] = nil
 default['mconf']['nuttcp']['enabled'] = false
 
 default['psutil']['version'] = "0.5.1"
+
+# cpu, memory and disk are expressed in %
+default['mconf']['performance_report']['cpu_warning'] = 70
+default['mconf']['performance_report']['cpu_critical'] = 90
+default['mconf']['performance_report']['memory_warning'] = 70
+default['mconf']['performance_report']['memory_critical'] = 90
+default['mconf']['performance_report']['disk_warning'] = 80
+default['mconf']['performance_report']['disk_critical'] = 90
+# network is expressed in kbps
+default['mconf']['performance_report']['network_warning'] = 40000
+default['mconf']['performance_report']['network_critical'] = 70000

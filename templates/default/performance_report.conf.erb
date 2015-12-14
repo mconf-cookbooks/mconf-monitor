@@ -8,14 +8,14 @@ stop on shutdown
 respawn
 
 env USER=mconf
-env APP="<%= node[:mconf][:nagios][:dir] %>/performance_report.py"
-env LOGFILE="<%= node[:mconf][:log][:dir] %>/performance_report.log"
+env APP="<%= @app_dir %>/performance_report.py"
+env LOGFILE="<%= @log_dir %>/performance_report.log"
 env PIDFILE="/var/run/performance_report.pid"
-env PARAMS="--hostname <%= node[:nsca][:hostname] %> --send_rate <%= node[:mconf][:interval] %>"
+env PARAMS="--hostname <%= @hostname %> --send_rate <%= @interval %> --network-warning <%= @network_warning %> --network-critical <%= @network_critical %> --cpu-warning <%= @cpu_warning %> --cpu-critical <%= @cpu_critical %> --memory-warning <%= @memory_warning %> --memory-critical <%= @memory_critical %> --disk-warning <%= @disk_warning %> --disk-critical <%= @disk_critical %>"
 
 script
     echo $$ > $PIDFILE
-    exec sudo -u $USER $APP $PARAMS 2>> $LOGFILE | sudo -u $USER <%= node[:mconf][:nagios][:dir] %>/reporter.sh >> $LOGFILE 2>&1
+    exec sudo -u $USER $APP $PARAMS 2>> $LOGFILE | sudo -u $USER <%= @app_dir %>/reporter.sh >> $LOGFILE 2>&1
 end script
 
 pre-start script
@@ -27,4 +27,3 @@ pre-stop script
     rm $PIDFILE
     echo "[`date -u +%Y-%m-%dT%T.%3NZ`] (sys) Stopping" >> $LOGFILE
 end script
-
