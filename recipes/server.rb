@@ -18,16 +18,18 @@ logrotate_app "rotate-nagios" do
   cookbook "logrotate"
   path "#{node['nagios']['log_dir']}/nagios.log"
   options [ "missingok", "compress", "copytruncate", "notifempty" ]
-  frequency "daily"
-  rotate 15
+  frequency node['mconf-monitor']['nagios']['logrotate']['frequency']
+  rotate node['mconf-monitor']['nagios']['logrotate']['rotate']
+  size node['mconf-monitor']['nagios']['logrotate']['size']
   create "644 nagios nagios"
 end
 
 logrotate_app "rotate-apache" do
   cookbook "logrotate"
-  path [ "#{node['nagios']['log_dir']}/apache_access.log", "#{node['nagios']['log_dir']}/apache_error.log" ]
+  path "#{node['apache']['log_dir']}/apache_*.log"
   options [ "missingok", "compress", "copytruncate", "notifempty" ]
-  size "300M"
-  rotate 30
+  frequency node['mconf-monitor']['apache']['logrotate']['frequency']
+  rotate node['mconf-monitor']['apache']['logrotate']['rotate']
+  size node['mconf-monitor']['apache']['logrotate']['size']
   create "644 root root"
 end

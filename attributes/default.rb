@@ -34,3 +34,14 @@ default['mconf']['performance_report']['disk_critical'] = 90
 # network is expressed in kbps
 default['mconf']['performance_report']['network_warning'] = 40000
 default['mconf']['performance_report']['network_critical'] = 70000
+
+# logrotate options
+# by default keeps one log file per week, during half a year
+default['mconf-monitor']['nagios']['logrotate']['frequency'] = 'weekly'
+default['mconf-monitor']['nagios']['logrotate']['rotate']    = 26
+default['mconf-monitor']['nagios']['logrotate']['size']      = nil
+
+# by default keeps one log file per week, during half a year
+default['mconf-monitor']['apache']['logrotate']['frequency'] = 'weekly'
+default['mconf-monitor']['apache']['logrotate']['rotate']    = 26
+default['mconf-monitor']['apache']['logrotate']['size']      = nil
