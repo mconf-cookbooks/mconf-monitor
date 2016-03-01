@@ -36,12 +36,13 @@ default['mconf']['performance_report']['network_warning'] = 40000
 default['mconf']['performance_report']['network_critical'] = 70000
 
 # logrotate options
-# by default keeps one log file per week, during half a year
-default['mconf-monitor']['nagios']['logrotate']['frequency'] = 'weekly'
-default['mconf-monitor']['nagios']['logrotate']['rotate']    = 26
+# by default keeps one log file per day, during ~3 months
+default['mconf-monitor']['nagios']['logrotate']['frequency'] = 'daily'
+default['mconf-monitor']['nagios']['logrotate']['rotate']    = 90
 default['mconf-monitor']['nagios']['logrotate']['size']      = nil
 
-# by default keeps one log file per week, during half a year
-default['mconf-monitor']['apache']['logrotate']['frequency'] = 'weekly'
-default['mconf-monitor']['apache']['logrotate']['rotate']    = 26
+# logrotate options for apache
+# by default keeps one log file per day, during ~3 months
+default['mconf-monitor']['apache']['logrotate']['frequency'] = 'daily'
+default['mconf-monitor']['apache']['logrotate']['rotate']    = 90
 default['mconf-monitor']['apache']['logrotate']['size']      = nil
