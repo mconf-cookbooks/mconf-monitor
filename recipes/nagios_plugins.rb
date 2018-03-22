@@ -34,7 +34,7 @@ end
 %w{ check_bbb_version
     check_api.rb }.each do |file|
   cookbook_file "#{node['nagios']['plugin_dir']}/#{file}" do
-    source "check_bbb_version"
+    source file
     owner node['nagios']['user']
     group node['nagios']['group']
     mode 00775
