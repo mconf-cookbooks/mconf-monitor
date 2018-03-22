@@ -31,12 +31,15 @@ end
   package pkg
 end
 
-cookbook_file "#{node['nagios']['plugin_dir']}/check_bbb_version" do
-  source "check_bbb_version"
-  owner node['nagios']['user']
-  group node['nagios']['group']
-  mode 00775
-  action :create
+%w{ check_bbb_version
+    check_api.rb }.each do |file|
+  cookbook_file "#{node['nagios']['plugin_dir']}/#{file}" do
+    source "check_bbb_version"
+    owner node['nagios']['user']
+    group node['nagios']['group']
+    mode 00775
+    action :create
+  end
 end
 
 %w{ bigbluebutton/bbb_api.py 
