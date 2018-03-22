@@ -1,4 +1,4 @@
-#!/usr/bin/ruby -w
+#!/usr/bin/ruby
 
 require 'net/http'
 require 'nokogiri'
@@ -259,7 +259,11 @@ else
   BBBProperties.load_properties_from_cli(opts[:server], opts[:salt])
 end
 
-URIBuilder.server_url = BBBProperties.server_url
+if BBBProperties.server_url =~ /^http[s]?:\/\//
+  URIBuilder.server_url = BBBProperties.server_url
+else
+  URIBuilder.server_url = (opts[:ssl] ? "https://" : "http://") + BBBProperties.server_url
+end
 
 if opts[:bbb]
   puts requester.get_response_code(URIBuilder.api_uri)

@@ -42,6 +42,13 @@ end
   end
 end
 
+%w{ nokogiri
+    trollop }.each do |dependency|
+  execute "Install dependencies for check_api.rb" do
+    command "gem install #{dependency}"
+  end
+end
+
 %w{ bigbluebutton/bbb_api.py 
     bigbluebutton/bigbluebutton_info.py 
     bigbluebutton/get-bigbluebutton-info.py 
