@@ -189,6 +189,15 @@ class Meetings < MonitoredService
     uri = URIBuilder.api_method_uri 'getMeetings'
     doc = Nokogiri::XML(@@requester.get_response(uri).body)
 
+    return_code = doc.at_xpath('/response/returncode');
+    if return_code.nil?
+      puts "Failed to get an answer from the API"
+      exit 2
+    elsif return_code.text == "FAILED"
+      puts "Failed with code #{doc.at_xpath('/response/messageKey').text}"
+      exit 2
+    end
+
     @@meetings = doc.xpath('//meeting')
   end
 
